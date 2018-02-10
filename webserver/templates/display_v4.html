@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+   <body>
+
+      {% if data|length > 1 %}
+
+          <table border = 1>
+              <thead>
+                  {% for key,value in data[0].items() %}
+
+                      <td>{{ key }}</td>
+
+                  {% endfor %}
+
+              </thead>
+
+              {% for row in data %}
+                  <tr>
+                  {% for key,value in row.items() %}
+                      <td>{{value}}</td>
+                  {%  endfor %}
+                  </tr>
+              {% endfor %}
+          </table>
+
+      {% elif data|length < 1 %}
+        <p> {{ 'Record not found' }} </p>
+
+      {% else %}
+
+          <table border = 1>
+              <thead>
+                  {% for key,value in data[0].items() %}
+
+                      <td>{{ key }}</td>
+
+                  {% endfor %}
+
+              </thead>
+
+              {% for row in data %}
+                  <tr>
+                  {% for key,value in row.items() %}
+                      <td>{{value}}</td>
+                  {%  endfor %}
+                  </tr>
+              {% endfor %}
+          </table>
+
+                <h2> Modify Nurse Details </h2>
+          Note: ssn cannot be changed and is used as key to find and update the record.
+<form method="POST" action="/updatenurse">
+    name: <br>
+    <input type="text" name="nname"> <br>
+    ssn: <br>
+    <input type="text" name="nssn" > <br>
+    Supervising room: <br>
+    <input type="number" name="rno"> <br>
+    <input type="submit" value="update">
+</form>
+
+
+      {% endif %}
+
+      <h2> Linked patients </h2>
+       {% if patient is not none %}
+           {% if patient|length < 1 %}
+               <p> {{ 'Record not found' }} </p>
+           {% else %}
+
+               <table border = 1>
+                   <thead>
+                       {% for key in (patient["data"][0])._parent.keys %}
+
+                          <td>{{ key }}</td>
+
+                       {% endfor %}
+
+                   </thead>
+
+                   {% for row in patient["data"] %}
+                       <tr>
+                           {% for value in row._row %}
+                               <td>{{value}}</td>
+                           {%  endfor %}
+                       </tr>
+                   {% endfor %}
+               </table>
+
+           {% endif %}
+       {% else %}
+          <p> {{ 'Record not found' }} </p>
+      {% endif %}
+      <h2> Linked Doctors </h2>
+      {% if doctor is not none %}
+           {% if  doctor|length < 1 %}
+               <p> {{ 'Record not found' }} </p>
+           {% else %}
+
+               <table border = 1>
+                   <thead>
+                       {% for key in (doctor["data"][0])._parent.keys %}
+
+                          <td>{{ key }}</td>
+
+                       {% endfor %}
+
+                   </thead>
+
+                   {% for row in doctor["data"] %}
+                       <tr>
+                           {% for value in row._row %}
+                               <td>{{value}}</td>
+                           {%  endfor %}
+                       </tr>
+                   {% endfor %}
+               </table>
+
+           {% endif %}
+       {% else %}
+          <p> {{ 'Record not found' }} </p>
+      {% endif %}
+
+
+      <a href = "nurse">Go back to Nurse home page</a>
+
+   </body>
+</html>

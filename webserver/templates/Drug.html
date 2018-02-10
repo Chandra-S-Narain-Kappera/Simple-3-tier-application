@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Drugs Enquiry </title>
+</head>
+<body>
+
+<form method="POST" action="/alldrugs">
+  <input type="submit" value="List all Drugs">
+</form>
+<form method="POST" action="/displaydrug">
+<p> Search a drug by name </p>
+<p>Drug Name: <input type="text" name="tradename"> <input type="submit" value="Check record"></p>
+<p> Search Drug by formula </p>
+<p>Forumla Name: <input type="text" name="formula"> <input type="submit" value="Check record"></p>
+<p> Search Drug by company </p>
+<p>Company Name: <input type="text" name="company"> <input type="submit" value="Check record"></p>
+</form>
+<br>
+
+<div> <p> Add a drug record  </p> </div>
+Note:<br>
+1) Formula name must be unique <br>
+2) Company should be already existing
+<form method="POST" action="/drug_add">
+    Name: <br>
+    <input type="text" name="tradename"> <br>
+    Formula: <br>
+    <input type="text" name="formula"> <br>
+    Company Name: <br>
+    <input type="text" name="company"> <br>
+
+    <input type="submit" value="add">
+</form>
+
+<br>
+<p> Delete a drug record  </p> </div>
+<form method="POST" action="/deldrug">
+    name: <br>
+    <input type="text" name="tradename"> <br>
+    <input type="submit" value="Delete">
+</form>
+<a href = "\">Go back to Home page</a>
+
+</body>
+</html>

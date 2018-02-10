@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+   <body>
+
+      {% if data|length > 1 %}
+
+          <table border = 1>
+              <thead>
+                  {% for key,value in data[0].items() %}
+
+                      <td>{{ key }}</td>
+
+                  {% endfor %}
+
+              </thead>
+
+              {% for row in data %}
+                  <tr>
+                  {% for key,value in row.items() %}
+                      <td>{{value}}</td>
+                  {%  endfor %}
+                  </tr>
+              {% endfor %}
+          </table>
+
+      {% elif data|length < 1 %}
+        <p> {{ 'Record not found' }} </p>
+
+      {% else %}
+
+          <table border = 1>
+              <thead>
+                  {% for key,value in data[0].items() %}
+
+                      <td>{{ key }}</td>
+
+                  {% endfor %}
+
+              </thead>
+
+              {% for row in data %}
+                  <tr>
+                  {% for key,value in row.items() %}
+                      <td>{{value}}</td>
+                  {%  endfor %}
+                  </tr>
+              {% endfor %}
+          </table>
+
+                <h2> Modify Drug Details </h2>
+          Note: formula must be unique, tradename cannot be changed and company must be existing one.
+<form method="POST" action="/updatedrug">
+    name: <br>
+    <input type="text" name="tradename"> <br>
+     formula: <br>
+    <input type="text" name="formula" > <br>
+    company: <br>
+    <input type="text" name="company"> <br>
+    <input type="submit" value="update">
+</form>
+
+
+      {% endif %}
+
+      <h2> Linked pharmacy </h2>
+       {% if admit is not none %}
+           {% if admit|length < 1 %}
+               <p> {{ 'Record not found' }} </p>
+           {% else %}
+
+               <table border = 1>
+                   <thead>
+                       {% for key in (admit["data"][0])._parent.keys %}
+
+                          <td>{{ key }}</td>
+
+                       {% endfor %}
+
+                   </thead>
+
+                   {% for row in admit["data"] %}
+                       <tr>
+                           {% for value in row._row %}
+                               <td>{{value}}</td>
+                           {%  endfor %}
+                       </tr>
+                   {% endfor %}
+               </table>
+
+           {% endif %}
+       {% else %}
+          <p> {{ 'Record not found' }} </p>
+      {% endif %}
+      <h2> Prescription History </h2>
+      {% if pres is not none %}
+           {% if pres|length < 1 %}
+               <p> {{ 'Record not found' }} </p>
+           {% else %}
+
+               <table border = 1>
+                   <thead>
+                       {% for key in (pres["data"][0])._parent.keys %}
+
+                          <td>{{ key }}</td>
+
+                       {% endfor %}
+
+                   </thead>
+
+                   {% for row in pres["data"] %}
+                       <tr>
+                           {% for value in row._row %}
+                               <td>{{value}}</td>
+                           {%  endfor %}
+                       </tr>
+                   {% endfor %}
+               </table>
+
+           {% endif %}
+       {% else %}
+          <p> {{ 'Record not found' }} </p>
+      {% endif %}
+
+
+      <a href = "drug">Go back to Drug home page</a>
+
+   </body>
+</html>

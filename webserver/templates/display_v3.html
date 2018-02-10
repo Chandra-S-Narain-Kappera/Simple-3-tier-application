@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+   <body>
+
+      {% if data|length > 1 %}
+
+          <table border = 1>
+              <thead>
+                  <td>Name</td>
+                  <td>SSN</td>
+                  <td>Expirience</td>
+                  <td>Speciality</td>
+              </thead>
+
+              {% for row in data %}
+                  <tr>
+                      <td>{{row["dname"]}}</td>
+                      <td>{{row["dssn"]}}</td>
+                      <td> {{ row["exp"]}}</td>
+                      <td>{{row['speciality']}}</td>
+                  </tr>
+              {% endfor %}
+          </table>
+
+      {% elif data|length < 1 %}
+        <p> {{ 'Record not found' }} </p>
+
+      {% else %}
+
+          <table border = 1>
+              <thead>
+                  {% for key,value in data[0].items() %}
+
+                      <td>{{ key }}</td>
+
+                  {% endfor %}
+
+              </thead>
+
+              {% for row in data %}
+                  <tr>
+                  {% for key,value in row.items() %}
+                      <td>{{value}}</td>
+                  {%  endfor %}
+                  </tr>
+              {% endfor %}
+          </table>
+
+                <h2> Modify Doctor Details </h2>
+          Note: ssn cannot be changed and is used as key to find and update the record.
+<form method="POST" action="/updatedoctor">
+    name: <br>
+    <input type="text" name="dname"> <br>
+    ssn: <br>
+    <input type="text" name="dssn" > <br>
+    exp: <br>
+    <input type="number" name="exp"> <br>
+    speciality:<br>
+    <input type="text" name="speciality">
+    <input type="submit" value="update">
+</form>
+<div> <p> Add a prescription record  </p> </div>
+          Note:<br>
+1) Patient SSN, Doctor SSN, Drug name should already be existing.
+<form method="POST" action="/addpres">
+    patient ssn: <br>
+    <input type="text" name="pssn"> <br>
+    doctor ssn: <br>
+    <input type="text" name="dssn"> <br>
+    date:<br>
+    <input type="text" name="date"> <br>
+     drug name: <br>
+    <input type="text" name="tradename"> <br>
+     quantity: <br>
+    <input type="number" name="quantity"> <br>
+    <input type="submit" value="add">
+</form>
+
+      {% endif %}
+
+      <h2> Linked prescriptions </h2>
+       {% if pres is not none %}
+           {% if pres|length < 1 %}
+               <p> {{ 'Record not found' }} </p>
+           {% else %}
+
+               <table border = 1>
+                   <thead>
+                       {% for key in (pres["data"][0])._parent.keys %}
+
+                          <td>{{ key }}</td>
+
+                       {% endfor %}
+
+                   </thead>
+
+                   {% for row in pres["data"] %}
+                       <tr>
+                           {% for value in row._row %}
+                               <td>{{value}}</td>
+                           {%  endfor %}
+                       </tr>
+                   {% endfor %}
+               </table>
+
+           {% endif %}
+       {% else %}
+          <p> {{ 'Record not found' }} </p>
+      {% endif %}
+      <h2> Linked Nurses </h2>
+      {% if nurse is not none %}
+           {% if nurse|length < 1 %}
+               <p> {{ 'Record not found' }} </p>
+           {% else %}
+
+               <table border = 1>
+                   <thead>
+                       {% for key in (nurse["data"][0])._parent.keys %}
+
+                          <td>{{ key }}</td>
+
+                       {% endfor %}
+
+                   </thead>
+
+                   {% for row in nurse["data"] %}
+                       <tr>
+                           {% for value in row._row %}
+                               <td>{{value}}</td>
+                           {%  endfor %}
+                       </tr>
+                   {% endfor %}
+               </table>
+
+           {% endif %}
+       {% else %}
+          <p> {{ 'Record not found' }} </p>
+      {% endif %}
+
+
+      <a href = "doctor">Go back to Doctor home page</a>
+
+   </body>
+</html>

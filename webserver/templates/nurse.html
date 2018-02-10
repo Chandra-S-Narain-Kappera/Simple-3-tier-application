@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Nurse Enquiry </title>
+</head>
+<body>
+<form method="POST" action="/allnurses">
+  <input type="submit" value="List all Nurses">
+</form>
+<form method="POST" action="/displayv4">
+<p>Search nurse by name </p>
+<p>Name of nurse: <input type="text" name="nname"> <input type="submit" value="Check record"></p>
+<p> Search nurse by ssn </p>
+<p>SSN of nurse: <input type="text" name="nssn"> <input type="submit" value="Check record"></p>
+<p> Search nurse by doctor </p>
+    <p>Name of doctor: <input type="text" name="dname"> <input type="submit" value="Check record"> </p>
+
+    <p> Search nurse by patient </p>
+<p>Name of patient: <input type="text" name="pname"> <input type="submit" value="Check record"></p>
+    <p> Search nurse by suprvising room </p>
+<p>Room Number: <input type="number" name="rno"> <input type="submit" value="Check record"></p>
+</form>
+<br>
+
+<div> <p> Add a nurse record  </p> </div>
+Note: ssn must be unique
+<form method="POST" action="/addnurse">
+    name: <br>
+    <input type="text" name="nname"> <br>
+    ssn: <br>
+    <input type="text" name="nssn"> <br>
+    Supervising room: <br>
+    <input type="number" name="rno"> <br>
+    <input type="submit" value="add">
+</form>
+
+<br>
+<p> Delete a nurse record  </p> </div>
+<form method="POST" action="/delnurse">
+    name: <br>
+    <input type="text" name="nname"> <br>
+    <input type="submit" value="Delete">
+</form>
+<a href = "\">Go back to Home page</a>
+
+</body>
+</html>

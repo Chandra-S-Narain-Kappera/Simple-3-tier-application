@@ -1,0 +1,142 @@
+<!doctype html>
+<b> {{ var1 }}</b>
+<html>
+   <body>
+
+      {% if data|length > 1 %}
+
+          <table border = 1>
+              <thead>
+                  <td>pssn</td>
+                  <td>name</td>
+                  <td>zip</td>
+                  <td>age</td>
+                  <td>dssn</td>
+                  <td>disease</td>
+              </thead>
+
+              {% for row in data %}
+                  <tr>
+                      <td>{{row["pssn"]}}</td>
+                      <td>{{row["pname"]}}</td>
+                      <td> {{ row["zip"]}}</td>
+                      <td>{{row['age']}}</td>
+                      <td>{{row["dssn"]}}</td>
+                      <td> {{ row["disease"]}}</td>
+                  </tr>
+              {% endfor %}
+          </table>
+
+      {% elif data|length < 1 %}
+        <p> {{ 'Record not found' }} </p>
+
+      {% else %}
+
+          <table border = 1>
+              <thead>
+                  {% for key,value in data[0].items() %}
+
+                      <td>{{ key }}</td>
+                      {% if key == 'ssn' %}
+                          {% set pssn = value %}
+                      {% endif %}
+
+                  {% endfor %}
+
+              </thead>
+
+              {% for row in data %}
+                  <tr>
+                  {% for key,value in row.items() %}
+                      <td>{{value}}</td>
+                  {%  endfor %}
+                  </tr>
+              {% endfor %}
+          </table>
+
+                <h2> Modify Patient Details </h2>
+
+          ssn of patient cannot be updated <br>
+    Doctor ssn must be a already existing value. <br>
+<form method="POST" action="/updatepatient">
+    name: <br>
+    <input type="text" name="pname"> <br>
+     ssn: <br>
+    <input type="text" name="pssn" > <br>
+    zip: <br>
+    <input type="number" name="zip"> <br>
+    age: <br>
+    <input type="number" name="age"> <br>
+    doctor's ssn: <br>
+    <input type="text" name="dssn"> <br>
+    disease: <br>
+    <input type="text" name="disease"> <br>
+    <input type="submit" value="update">
+</form>
+
+      {% endif %}
+
+      <h2> Admission History </h2>
+       {% if admit is not none %}
+           {% if admit|length < 1 %}
+               <p> {{ 'Record not found' }} </p>
+           {% else %}
+
+               <table border = 1>
+                   <thead>
+                       {% for key in (admit["data"][0])._parent.keys %}
+
+                          <td>{{ key }}</td>
+
+                       {% endfor %}
+
+                   </thead>
+
+                   {% for row in admit["data"] %}
+                       <tr>
+                           {% for value in row._row %}
+                               <td>{{value}}</td>
+                           {%  endfor %}
+                       </tr>
+                   {% endfor %}
+               </table>
+
+           {% endif %}
+       {% else %}
+          <p> {{ 'Record not found' }} </p>
+      {% endif %}
+      <h2> Prescription History </h2>
+      {% if pres is not none %}
+           {% if pres|length < 1 %}
+               <p> {{ 'Record not found' }} </p>
+           {% else %}
+
+               <table border = 1>
+                   <thead>
+                       {% for key in (pres["data"][0])._parent.keys %}
+
+                          <td>{{ key }}</td>
+
+                       {% endfor %}
+
+                   </thead>
+
+                   {% for row in pres["data"] %}
+                       <tr>
+                           {% for value in row._row %}
+                               <td>{{value}}</td>
+                           {%  endfor %}
+                       </tr>
+                   {% endfor %}
+               </table>
+
+           {% endif %}
+       {% else %}
+          <p> {{ 'Record not found' }} </p>
+      {% endif %}
+
+
+      <a href = "patient">Go back to Patient home page</a>
+
+   </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Patient Enquiry </title>
+</head>
+<body>
+<form method="POST" action="/displayall">
+  <input type="submit" value="List all Patients">
+</form>
+<form method="POST" action="/display">
+<p> Search Patient by name </p>
+<p>Name of Patient: <input type="text" name="name"> <input type="submit" value="Check record"></p>
+<p> Search Patient by ssn </p>
+<p>SSN of Patient: <input type="text" name="ssn"> <input type="submit" value="Check record"></p>
+<p> Search Patient by Doctor suprvising </p>
+<p>Name of doctor: <input type="text" name="dname"> <input type="submit" value="Check record"></p>
+</form>
+<br>
+
+<div> <p> Add a patient record  </p> </div>
+Note: ssn of patient must be unique and doctor's ssn must already be existing.
+<form method="POST" action="/addpatient">
+    name: <br>
+    <input type="text" name="pname"> <br>
+     ssn: <br>
+    <input type="text" name="pssn"> <br>
+    zip: <br>
+    <input type="number" name="zip"> <br>
+    age: <br>
+    <input type="number" name="age"> <br>
+    doctor's ssn: <br>
+    <input type="text" name="dssn"> <br>
+    disease: <br>
+    <input type="text" name="disease"> <br>
+    <input type="submit" value="add">
+</form>
+
+<br>
+<p> Delete a patient record  </p> </div>
+<form method="POST" action="/delpatient">
+    name: <br>
+    <input type="text" name="pname"> <br>
+    <input type="submit" value="Delete">
+</form>
+<a href = "\">Go back to Home page</a>
+
+</body>
+</html>

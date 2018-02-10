@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check the list</title>
+</head>
+<body>
+  <div>
+    {% if data|length < 1 %}
+        <p> {{ 'Record not found' }} </p>
+    {% else %}
+        {% for n in data %}
+        <div>{{n}}</div>
+        {% endfor %}
+    {%  endif %}
+  </div>
+<p><a href="patient">Go to the other page</a></p>
+</body>
+</html>
